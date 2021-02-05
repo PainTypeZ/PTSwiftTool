@@ -1,0 +1,6 @@
+framework module PTSwiftTool {
+  umbrella header "PTSwiftTool-umbrella.h"
+
+  export *
+  module * { export * }
+}

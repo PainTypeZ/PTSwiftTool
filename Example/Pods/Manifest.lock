@@ -1,0 +1,16 @@
+PODS:
+  - PTSwiftTool (0.1.0)
+
+DEPENDENCIES:
+  - PTSwiftTool (from `../`)
+
+EXTERNAL SOURCES:
+  PTSwiftTool:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PTSwiftTool: f1d1341f540c63671e18f2ced49af9ed9de3e504
+
+PODFILE CHECKSUM: 99c4e9caf7675b5bd8816d04447dcb5c9800ed3a
+
+COCOAPODS: 1.10.0

@@ -1,0 +1,29 @@
+# PTSwiftTool
+
+[![CI Status](https://img.shields.io/travis/pengpingjun@icloud.com/PTSwiftTool.svg?style=flat)](https://travis-ci.org/pengpingjun@icloud.com/PTSwiftTool)
+[![Version](https://img.shields.io/cocoapods/v/PTSwiftTool.svg?style=flat)](https://cocoapods.org/pods/PTSwiftTool)
+[![License](https://img.shields.io/cocoapods/l/PTSwiftTool.svg?style=flat)](https://cocoapods.org/pods/PTSwiftTool)
+[![Platform](https://img.shields.io/cocoapods/p/PTSwiftTool.svg?style=flat)](https://cocoapods.org/pods/PTSwiftTool)
+
+## Example
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+## Requirements
+
+## Installation
+
+PTSwiftTool is available through [CocoaPods](https://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'PTSwiftTool'
+```
+
+## Author
+
+pengpingjun@icloud.com, pengpingjun@icloud.com
+
+## License
+
+PTSwiftTool is available under the MIT license. See the LICENSE file for more info.

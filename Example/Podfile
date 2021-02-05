@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'PTSwiftTool_Example' do
+  pod 'PTSwiftTool', :path => '../'
+
+  target 'PTSwiftTool_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

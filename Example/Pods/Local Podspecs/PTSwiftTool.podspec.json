@@ -1,7 +1,7 @@
 {
   "name": "PTSwiftTool",
   "version": "0.1.0",
-  "summary": "A short description of PTSwiftTool.",
+  "summary": "PTSwiftTool",
   "swift_versions": "5.3.0",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/PainTypeZ/PTSwiftTool",

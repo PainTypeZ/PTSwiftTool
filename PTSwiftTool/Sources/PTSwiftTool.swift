@@ -12,11 +12,28 @@ public protocol StoryBoardName {
 }
 
 public struct PTSwiftTool {
+    public let domain = FileManager.SearchPathDirectory.cachesDirectory
+    public let mask = FileManager.SearchPathDomainMask.userDomainMask
+    public var cachePath: String {
+        guard let path = NSSearchPathForDirectoriesInDomains(domain, mask, true).first else {
+            print("cachePath获取失败")
+            return ""
+        }
+        return path
+    }
+    public var fileArray: [String] {
+        guard let array = FileManager.default.subpaths(atPath: cachePath) else {
+            print("fileArrary获取失败")
+            return []
+        }
+        return array
+    }
     /// 单例
     public static var shared = Self()
     private init() {
 
     }
+    
     /// 获取故事板VC
     /// - Parameter stroyBoard: 遵守StoryBoardName协议的对象
     /// - Returns: 控制器类型
@@ -42,55 +59,35 @@ public struct PTSwiftTool {
     }
     /// 获取app缓存大小
     public func getCacheSize() -> String {
-        let domain = FileManager.SearchPathDirectory.cachesDirectory
-        let mask = FileManager.SearchPathDomainMask.userDomainMask
-        if let cachePath = NSSearchPathForDirectoriesInDomains(domain, mask, true).first {
-            if let fileArr = FileManager.default.subpaths(atPath: cachePath) {
-                var size: Double = 0
-                fileArr.forEach {
-                    let path = (cachePath as NSString).appending("/\($0)")
-                    if let floder = try? FileManager.default.attributesOfItem(atPath: path) {
-                        floder.forEach {
-                            if $0.key == FileAttributeKey.size {
-                                size += ($0.value as AnyObject).doubleValue
-                            }
-                        }
-                    } else {
-                        print("floder获取失败")
-                    }
-                }
-                let cache = size / 1024 / 1024
-                return String(cache) + "MB"
-            } else {
-                print("fileArr获取失败")
-                return ""
+        var size: Double = 0
+        fileArray.forEach {
+            let path = (cachePath as NSString).appending("/\($0)")
+            guard let floder = try? FileManager.default.attributesOfItem(atPath: path) else {
+                print("floder获取失败")
+                return
             }
-        } else {
-            print("cachePath获取失败")
-            return ""
+            floder.forEach {
+                guard $0.key == FileAttributeKey.size else {
+                    return
+                }
+                size += ($0.value as AnyObject).doubleValue
+            }
         }
+        let cache = size / 1024 / 1024
+        return String(cache) + "MB"
     }
     /// 清除app缓存
     public func clearAllCache() {
-        let domain = FileManager.SearchPathDirectory.cachesDirectory
-        let mask = FileManager.SearchPathDomainMask.userDomainMask
-        if let cachePath = NSSearchPathForDirectoriesInDomains(domain, mask, true).first {
-            if let fileArr = FileManager.default.subpaths(atPath: cachePath) {
-                for file in fileArr {
-                    let path = (cachePath as NSString).appending("/\(file)")
-                    if FileManager.default.fileExists(atPath: path) {
-                        do {
-                            try FileManager.default.removeItem(atPath: path)
-                        } catch let error {
-                            print("FileManagerError: " + error.localizedDescription)
-                        }
-                    }
-                }
-            } else {
-                print("fileArr获取失败")
+        fileArray.forEach {
+            let path = (cachePath as NSString).appending("/\($0)")
+            guard FileManager.default.fileExists(atPath: path) else {
+                return
             }
-        } else {
-            print("cachePath获取失败")
+            do {
+                try FileManager.default.removeItem(atPath: path)
+            } catch let error {
+                print("FileManagerError: " + error.localizedDescription)
+            }
         }
     }
     /// 根据window获取顶层控制器
